@@ -38,7 +38,14 @@ public class Interact : MonoBehaviour
                 if (hitInfo.collider.tag == "NPC")
                 {
                     //Debug that we hit a NPC   
-                    Debug.Log("OH HELLO THERE: " + hitInfo.transform.name + "is talking to you");
+                    Debug.Log("OH HELLO THERE: " + hitInfo.transform.name + " is talking to you");
+
+                    //trigger the dialouge script
+
+                    if (hitInfo.collider.GetComponent<Dialogue>())
+                    {
+                        hitInfo.collider.GetComponent<Dialogue>().OpenDialouge();
+                    }
 
                 }
                 #endregion
@@ -68,10 +75,7 @@ public class Interact : MonoBehaviour
             }
 
 
-
         }
-
-
 
     }
 

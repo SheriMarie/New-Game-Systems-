@@ -20,14 +20,18 @@ public class Dialogue : MonoBehaviour
         currentLineOfText = 0;
 
         //any other thing you need 
-
+        GlobalGameState.ChangeGameState(GameStates.UIShowOnScreen);
     }
 
     public void CloseDialouge()
     {
         //trigger bool
-        //reset int
-        //any other thing you need
+        showDialogue = false;
 
+        //reset int
+        currentLineOfText = 0;
+
+        //any other thing you need
+        GlobalGameState.ChangeGameState(GameStates.AbleToMove);
     }
 }

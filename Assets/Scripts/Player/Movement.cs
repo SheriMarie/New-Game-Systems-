@@ -26,12 +26,13 @@ public class Movement : MonoBehaviour
     {
         //_charc is set to the Character controller on this GameObject
         _characterController = GetComponent<CharacterController>();
+        GlobalGameState.ChangeGameState(GameStates.AbleToMove);
     }
     #endregion
     #region Update
     private void Update()
     {
-        if (true)//only move if we should move (are we alive...is the game paused??? whats the state of things)
+        if (GlobalGameState.currentGameState == GameStates.AbleToMove)//only move if we should move (are we alive...is the game paused??? whats the state of things)
         {
             MoveTheCharacter();
         }

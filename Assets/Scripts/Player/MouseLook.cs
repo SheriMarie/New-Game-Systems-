@@ -54,34 +54,38 @@ public class MouseLook : MonoBehaviour
     #region Update
     private void Update()
     {
-        #region Mouse X
-        //if we are rotating on the X
-        if(_axis == RotationalAxis.MouseX)
+        if (GlobalGameState.currentGameState == GameStates.AbleToMove)//only move if we should move (are we alive...is the game paused??? whats the state of things)
         {
-            //transform the rotation on our game objects Y by our Mouse input Mouse X * sensitivity
-            //x                y                          z
-            transform.Rotate(0,Input.GetAxis("Mouse X") * sensitivity,0);
-        }
-        #endregion
-        #region Mouse Y
-        //else we are only rotation on the Y
-        else
-        {
-            //our rotation Y is pulse equals  our mouse input for Mouse Y times Y sensitivity
-            _rotationMouseY += Input.GetAxis("Mouse Y") * sensitivity;
-            //the rotation Y is clamped using Mathf and we are clamping the y rotation to the Y min and Y max
-            _rotationMouseY = Mathf.Clamp(_rotationMouseY,_clamp.x,_clamp.y);
-            //transform our local position to the nex vector3 rotaion - y rotaion on the x axis and local euler angle Y on the y axis
-            if(invertMouse ) // mouse movement is inverted ... aka plane controls
+            #region Mouse X
+            //if we are rotating on the X
+            if (_axis == RotationalAxis.MouseX)
             {
-                transform.localEulerAngles = new Vector3(_rotationMouseY,0,0);
+                //transform the rotation on our game objects Y by our Mouse input Mouse X * sensitivity
+                //x                y                          z
+                transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivity, 0);
             }
-            else // mouse movement is not inverted ... aka standard mouse controls 
+            #endregion
+            #region Mouse Y
+            //else we are only rotation on the Y
+            else
             {
-                transform.localEulerAngles = new Vector3(-_rotationMouseY, 0, 0);
+                //our rotation Y is pulse equals  our mouse input for Mouse Y times Y sensitivity
+                _rotationMouseY += Input.GetAxis("Mouse Y") * sensitivity;
+                //the rotation Y is clamped using Mathf and we are clamping the y rotation to the Y min and Y max
+                _rotationMouseY = Mathf.Clamp(_rotationMouseY, _clamp.x, _clamp.y);
+                //transform our local position to the nex vector3 rotaion - y rotaion on the x axis and local euler angle Y on the y axis
+                if (invertMouse) // mouse movement is inverted ... aka plane controls
+                {
+                    transform.localEulerAngles = new Vector3(_rotationMouseY, 0, 0);
+                }
+                else // mouse movement is not inverted ... aka standard mouse controls 
+                {
+                    transform.localEulerAngles = new Vector3(-_rotationMouseY, 0, 0);
+                }
             }
+            #endregion
         }
-        #endregion
+
     }
     #endregion
 }
